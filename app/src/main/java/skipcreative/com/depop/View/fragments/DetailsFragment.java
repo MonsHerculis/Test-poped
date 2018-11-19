@@ -1,6 +1,7 @@
 package skipcreative.com.depop.View.fragments;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -22,9 +23,13 @@ import android.view.ViewGroup;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,15 +133,16 @@ public class DetailsFragment extends Fragment implements ImageGalleryAdapter.OnI
         List<String> galleryList = new ArrayList<>();
         object.getPicturesData().size();
         for(int x = 0; x < object.getPicturesData().size(); x++){
-            galleryList.add(object.getPicturesData().get(x).getFormats().getP0().getUrl());
+            galleryList.add(object.getPicturesData().get(x).getFormats().getP5().getUrl());
         }
-
-
         return galleryList;
     }
     public void setImage(Context context, String url, ImageView imgView){
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(16));
         Glide.with(context)
                 .load(url)
+                .apply(requestOptions)
                 .into(imgView);
     }
 

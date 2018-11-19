@@ -55,6 +55,8 @@ public class ListFragment extends Fragment implements ArticleAdapter.OnItemSelec
         recyclerView = root.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         toolbar = root.findViewById(R.id.toolbar);
+        toolbar.setTitle(getResources().getString(R.string.toolbar_name));
+
         noSignalContainer = root.findViewById(R.id.containerEmptyConnectivity);
 
         articlePresenter = new ArticlePresenter(this);
